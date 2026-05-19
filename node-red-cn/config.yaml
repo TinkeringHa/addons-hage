@@ -1,10 +1,10 @@
 ---
 name: Node-RED 汉化版
-version: "21.0.7.3"
+version: "21.0.7.4"
 slug: nodered-cn
 description: 基于物联网的可视化流程编程工具（汉化增强版）
 image: tinkeringha/node-red-cn-{arch}
-url: https://github.com/TinkeringHa/ha-addons
+url: https://github.com/TinkeringHa/addons-hage
 ingress: true
 ingress_port: 0
 ingress_stream: true

@@ -1,30 +1,36 @@
-# Node-RED 汉化版
+# Home Assistant Community App: Node-RED
 
-[Node-RED][nodered] 是一款面向物联网的可视化流程编程工具，可将硬件设备、API 和在线服务以全新方式连接起来。
+[Node-RED][nodered] is a programming tool for wiring together hardware devices,
+APIs and online services in new and interesting ways.
 
-它提供基于浏览器的编辑器，通过丰富的节点面板轻松构建流程，并可一键部署到运行时。
+It provides a browser-based editor that makes it easy to wire together flows
+using the wide range of nodes in the palette that can be deployed to its
+runtime in a single click.
 
-## 安装
+## Installation
 
-安装方式与其他 Home Assistant 插件相同，十分简单。
+The installation of this app is pretty straightforward and not different in
+comparison to installing any other Home Assistant app.
 
-1. 点击下方按钮，在你的 Home Assistant 实例中打开本插件。
+1. Click the Home Assistant My button below to open the app on your Home
+   Assistant instance.
 
-   [![在 Home Assistant 中打开此插件][addon-badge]][addon]
+   [![Open this app in your Home Assistant instance.][addon-badge]][addon]
 
-1. 点击"安装"按钮安装插件。
-1. 启动"Node-RED"插件。
-1. 查看"Node-RED"的日志，确认一切正常。
-1. 点击"打开网页界面"按钮进入 Node-RED。
-1. 插件开箱即用，无需配置服务器！
+1. Click the "Install" button to install the app.
+1. Start the "Node-RED" app.
+1. Check the logs of "Node-RED" to see if everything went well.
+1. Click on the "OPEN WEB UI" button to jump into Node-RED.
+1. The app works straight out the box! No need to configure a server!
 
-**注意**：插件已**预配置**，无需手动添加/修改服务器连接设置！
+**Note**: The app is **pre-configured** out of the box! There is no need
+to add/change/update the server connection settings!
 
-## 配置
+## Configuration
 
-**注意**：_修改配置后请重启插件使其生效。_
+**Note**: _Remember to restart the app when the configuration is changed._
 
-配置示例：
+Example app configuration:
 
 ```yaml
 log_level: info
@@ -46,50 +52,63 @@ init_commands:
   - echo 'So is this...'
 ```
 
-**注意**：_以上仅为示例，请勿直接复制粘贴！请根据实际情况自行配置。_
+**Note**: _This is just an example, don't copy and paste it! Create your own!_
 
-### 选项：`log_level`
+### Option: `log_level`
 
-`log_level` 控制插件日志的输出级别，可根据排查问题的需要调整详细程度。可选值：
+The `log_level` option controls the level of log output by the app and can
+be changed to be more or less verbose, which might be useful when you are
+dealing with an unknown issue. Possible values are:
 
-- `trace`：显示所有细节，包括所有内部函数调用。
-- `debug`：显示详细的调试信息。
-- `info`：正常运行时的常规事件（推荐）。
-- `warning`：非错误性的异常情况。
-- `error`：不需要立即处理的运行时错误。
-- `fatal`：发生严重错误，插件无法正常使用。
+- `trace`: Show every detail, like all called internal functions.
+- `debug`: Shows detailed debug information.
+- `info`: Normal (usually) interesting events.
+- `warning`: Exceptional occurrences that are not errors.
+- `error`: Runtime errors that do not require immediate action.
+- `fatal`: Something went terribly wrong. App becomes unusable.
 
-每个级别会自动包含更高严重级别的日志，例如 `debug` 也会显示 `info` 消息。默认值为 `info`，非排查问题时建议保持默认。
+Please note that each level automatically includes log messages from a
+more severe level, e.g., `debug` also shows `info` messages. By default,
+the `log_level` is set to `info`, which is the recommended setting unless
+you are troubleshooting.
 
-### 选项：`ssl`
+### Option: `ssl`
 
-启用或禁用网页界面的 SSL（HTTPS）。设为 `true` 启用，`false` 禁用。
+Enables/Disables SSL (HTTPS) on the web interface.
+Set it `true` to enable it, `false` otherwise.
 
-**注意**：_SSL 设置仅对直接访问有效，对 Ingress 服务无效。_
+**Note**: _The SSL settings only apply to direct access and has no effect
+on the Ingress service._
 
-### 选项：`certfile`
+### Option: `certfile`
 
-SSL 使用的证书文件。
+The certificate file to use for SSL.
 
-**注意**：_文件必须存放在 `/ssl/` 目录下（默认路径）。_
+**Note**: _The file MUST be stored in `/ssl/`, which is the default_
 
-### 选项：`keyfile`
+### Option: `keyfile`
 
-SSL 使用的私钥文件。
+The private key file to use for SSL.
 
-**注意**：_文件必须存放在 `/ssl/` 目录下（默认路径）。_
+**Note**: _The file MUST be stored in `/ssl/`, which is the default_
 
-### 选项：`credential_secret`
+### Option: `credential_secret`
 
-Node-RED 在存储时会使用密钥对凭据进行加密。此选项用于指定你的密钥，可以是任意字符串，类似密码。请妥善保存，日后（如恢复备份时）可能需要用到。
+Credentials are encrypted by Node-RED in storage, using a secret key.
+This option allows you to specify your secret key. This can be anything
+you like, it is just like a password. Be sure to store it somewhere safe.
+You might need it in the future! (e.g., When restoring a backup).
 
-**注意**：_一旦设置此属性，请勿修改——否则 Node-RED 将无法解密已有凭据，导致凭据丢失。_
+**Note**: _Once you set this property, do not change it - doing so will prevent
+Node-RED from being able to decrypt your existing credentials and they will be
+lost._
 
-**注意**：_如果你在 Node-RED 中手动启用了项目功能，此选项虽然必填，但会被 Node-RED 忽略。_
+**Note**: _If you have manually enabled the use of project in Node-RED, this
+option will, eventhough required, be ignored by Node-RED._
 
-### 选项：`theme`
+### Option: `theme`
 
-设置 Node-RED 的界面主题。当前可用选项：
+Sets one of the Node-RED themes. Currently available options:
 
 - `default`
 - `aurora`
@@ -129,109 +148,190 @@ Node-RED 在存储时会使用密钥对凭据进行加密。此选项用于指�
 - `zenburn`
 - `zendesk-garden`
 
-### 选项：`http_node`
+### Option: `http_node`
 
-为节点定义的 HTTP 端点（`httpNodeRoot`）设置密码保护，可配置以下属性：
-
-- `username`
-- `password`
-
-**注意**：_使用 `http_node` 需要在"网络"配置中为 Node-RED 开放端口（除 Ingress 外）。HTTP 节点将以 `/endpoint/` 路径呈现。如使用 `node-red-dashboard`，其页面同样托管在此路径下，并使用此处配置的凭据。_
-
-### 选项：`http_static`
-
-为静态内容（httpStatic）设置密码保护，可配置以下属性：
+To password protect the node-defined HTTP endpoints (`httpNodeRoot`),
+the following properties can be used:
 
 - `username`
 - `password`
 
-### 选项：`system_packages`
+**Note**: _In order to use the `http_node` you will need to expose Node-RED using
+a network port in addition to ingress. The HTTP nodes will also be presented
+under `/endpoint/` as shown in the UI. If using the `node-red-dashboard` module
+this will also be hosted under this path and will use any credentials set here._
 
-指定额外安装的 [Alpine 软件包][alpine-packages]（如 `g++`、`make`、`ffmpeg`）。
+### Option: `http_static`
 
-**注意**：_安装的包越多，插件启动时间越长。_
+To password protect the static content (httpStatic), the following
+properties can be used:
 
-### 选项：`npm_packages`
+- `username`
+- `password`
 
-指定额外安装的 [NPM 包][npm-packages] 或 [Node-RED 节点][node-red-nodes]（如 `node-red-dashboard`、`node-red-contrib-ccu`）。
+### Option: `system_packages`
 
-**注意**：_安装的包越多，插件启动时间越长。_
+Allows you to specify additional [Alpine packages][alpine-packages] to be
+installed to your Node-RED setup (e.g., `g++`. `make`, `ffmpeg`).
 
-### 选项：`init_commands`
+**Note**: _Adding many packages will result in a longer start-up time
+for the app._
 
-通过 `init_commands` 进一步自定义 Node-RED 环境。在列表中添加一条或多条 Shell 命令，每次插件启动时都会执行。
+### Option: `npm_packages`
 
-### 选项：`safe_mode`
+Allows you to specify additional [NPM packages][npm-packages] or
+[Node-RED nodes][node-red-nodes] to be installed to your Node-RED setup
+(e.g., `node-red-dashboard`, `node-red-contrib-ccu`).
 
-设为 `true` 时，Node-RED 将以 `--safe` 标志启动，不启动任何流程，用于故障排查。
+**Note**: _Adding many packages will result in a longer start-up time
+for the app._
 
-### 选项：`leave_front_door_open`
+### Option: `init_commands`
 
-设为 `true` 并留空用户名和密码，可禁用插件的身份验证。
+Customize your Node-RED environment even more with the `init_commands` option.
+Add one or more shell commands to the list, and they will be executed every
+single time this app starts.
 
-**注意**：_即使插件仅在内网使用，我们也**强烈不建议**开启此选项。风险自负！_
+### Option: `safe_mode`
 
-### 选项：`max_old_space_size`
+Setting this option to `true` will start Node-Red with the `--safe` flag set,
+starting the application without starting any flows for troubleshooting.
 
-设置 Node.js V8 引擎旧内存区的最大内存（MB）。当内存占用接近上限时，V8 会加大垃圾回收力度以释放内存。
+### Option: `leave_front_door_open`
+
+Adding this option to the app configuration allows you to disable
+authentication on the app by setting it to `true` and leaving the
+username and password empty.
+
+**Note**: _We STRONGLY suggest, not to use this, even if this app is
+only exposed to your internal network. USE AT YOUR OWN RISK!_
+
+### Option: `max_old_space_size`
+
+Sets the max memory size (in MB) of nodeJS V8's old memory section.
+As memory consumption approaches the limit, V8 will spend more time
+on garbage collection in an effort to free unused memory.
 
 <https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes>
 
-## 配置文件夹
+## Configuration folder
 
-插件的大部分配置（包括 `flows.json`）存储在 Node-RED 的配置文件夹中。
+The app will store most of its configuration in the Node-RED app
+configuration folder, including the `flows.json`.
 
-## 时区配置
+## Time zone configuration
 
-插件默认使用 Home Assistant 中配置的时区。如时区不正确，请在 Home Assistant 设置中更新时区，然后重启 Node-RED 插件使其生效。
+The app will use the time zone configured in Home Assistant settings. If
+the time zone is incorrect, update the setting in Home Assistant and restart
+the Node-RED app to apply the latest configuration.
 
-如需单独为 Node-RED 指定时区，可在 `settings.js` 文件中配置：用文本编辑器打开该文件，在 `module.exports = {` 行上方添加：
+If you would like to override the time zone for Node-RED specifically, this
+can be configured in the `settings.js` file.
 
-`process.env.TZ = "Asia/Shanghai";`
+To do so, open the file with a text editor and add the following above the
+`module.exports = {` line.
 
-根据实际环境修改时区名称，保存后重启 Node-RED 插件。
+`process.env.TZ = "America/Toronto";`
 
-## 已知问题与限制
+The time zone will need to reflect your environment.
 
-- 本插件内置 Node-RED Dashboard，但目前不支持通过 Ingress 访问 Dashboard，这是 Node-RED Dashboard 本身的技术限制。
+Save the file and restart the Node-RED app.
 
-- 如果无法访问 HTTP 节点或 Node-RED Dashboard，请检查"网络"配置中是否已设置端口号以启用直接访问模式。
+## Known issues and limitations
 
-- 访问 HTTP 节点或 Dashboard 时，URL 须以 `/endpoint/` 开头，否则 Home Assistant 身份验证会介入拦截。
+- While this app ships with Node-RED Dashboard, it currently does not
+  support accessing the dashboard via Ingress. This is a technical limitation
+  on the Node-RED Dashboard end.
 
-- 如升级后出现以下错误：`WARNING (MainThread) [hassio.api.proxy] Unauthorized WebSocket access!`，请验证 Node-RED 中 Home Assistant 服务器的配置——双击任意 HA 节点，点击服务器名旁的铅笔图标，确保勾选了"我使用 Home Assistant 插件"选项。
+- If you cannot access HTTP nodes or Node-RED Dashboard, please check
+  if you have enabled direct access mode by setting a port number in
+  "Network" configuration section of the app.
 
-## 更新日志与发布
+- If you cannot access HTTP nodes or Node-RED Dashboard, please check
+  if you URL starts with `/endpoint/`, or else Home Assistant authentication
+  will kick in.
 
-发布记录基于 [Keep a Changelog][keepchangelog] 格式，版本号遵循 [语义化版本][semver] 规范：
+- If the following error is seen after an update:
+  `WARNING (MainThread) [hassio.api.proxy] Unauthorized WebSocket access!`.
+  Please validate the configuration of the Home Assistant server setup in
+  Node-RED. This can be found by double-clicking any Home Assistant node and
+  selecting the pencil icon by the server name. The checkbox that states
+  `I use the Home Assistant App` should be checked.
 
-- `MAJOR`：不兼容或重大变更。
-- `MINOR`：向后兼容的新功能和增强。
-- `PATCH`：向后兼容的错误修复和依赖更新。
+## Changelog & Releases
 
-## 支持
+This repository keeps a change log using [GitHub's releases][releases]
+functionality. The format of the log is based on
+[Keep a Changelog][keepchangelog].
 
-有问题？可通过以下渠道获取帮助：
+Releases are based on [Semantic Versioning][semver], and use the format
+of `MAJOR.MINOR.PATCH`. In a nutshell, the version will be incremented
+based on the following:
 
-- [Home Assistant 社区论坛][forum]
-- [Node-RED 官方文档][nodered-docs]
-- 在 [GitHub 提交 Issue][issue]
+- `MAJOR`: Incompatible or major changes.
+- `MINOR`: Backwards-compatible new features and enhancements.
+- `PATCH`: Backwards-compatible bugfixes and package updates.
 
-## 许可证
+## Support
+
+Got questions?
+
+You have several options to get them answered:
+
+- The [Home Assistant Community Apps Discord chat server][discord] for app
+  support and feature requests.
+- The [Home Assistant Discord chat server][discord-ha] for general Home
+  Assistant discussions and questions.
+- The Home Assistant [Community Forum][forum].
+- Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
+- The [Node-RED documentation][nodered-docs]
+
+You could also [open an issue here][issue] GitHub.
+
+## Authors & contributors
+
+The original setup of this repository is by [Franck Nijhof][frenck].
+
+For a full list of all authors and contributors,
+check [the contributor's page][contributors].
+
+## License
 
 MIT License
 
 Copyright (c) 2018-2026 Franck Nijhof
 
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
 [addon-badge]: https://my.home-assistant.io/badges/supervisor_addon.svg
 [addon]: https://my.home-assistant.io/redirect/supervisor_addon/?addon=a0d7b954_nodered&repository_url=https%3A%2F%2Fgithub.com%2Fhassio-addons%2Frepository
 [alpine-packages]: https://pkgs.alpinelinux.org/packages
 [contributors]: https://github.com/hassio-addons/app-node-red/graphs/contributors
+[discord-ha]: https://discord.gg/c5DvZ4e
+[discord]: https://discord.me/hassioaddons
 [forum]: https://community.home-assistant.io/t/home-assistant-community-add-on-node-red/55023?u=frenck
-[issue]: https://github.com/TinkeringHa/addons-hage/issues
+[frenck]: https://github.com/frenck
+[issue]: https://github.com/hassio-addons/app-node-red/issues
 [node-red-nodes]: https://flows.nodered.org/?type=node&num_pages=1
 [nodered-docs]: https://nodered.org/docs
 [nodered]: https://nodered.org
 [npm-packages]: https://www.npmjs.com
-[keepchangelog]: https://keepachangelog.com/zh-CN/1.0.0/
+[reddit]: https://reddit.com/r/homeassistant
+[releases]: https://github.com/hassio-addons/app-node-red/releases
 [semver]: https://semver.org/spec/v2.0.0.html

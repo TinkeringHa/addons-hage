@@ -1,5 +1,13 @@
 # Changelog
 
+## [22.2.2.2] - 2026-11-26
+
+### 修复
+- 修复 22.2.2 基础镜像改用 s6-overlay 3.2 后 `nodered` / `nginx` 服务不被启动的问题：rootfs 中残留的空 `s6-rc.d/user` 目录会让 s6-overlay 走旧的 bundle 路径，导致服务未注册、容器 Up 但端口不通
+- Dockerfile 增加 `rm -rf /etc/s6-overlay/s6-rc.d/user{,2}` 兜底
+
+---
+
 ## [22.2.2.1] - 2026-11-20
 
 ### 升级
